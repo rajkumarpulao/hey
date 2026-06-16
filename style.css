@@ -7,22 +7,26 @@
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(180deg, #f6b1c3, #e684ae);
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  padding: 15px;
+  overflow-y: auto;
 }
 
 /* Glass card */
 .card {
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(12px);
-  padding: 35px;
+  padding: 25px;
   border-radius: 25px;
   text-align: center;
-  max-width: 340px;
+  width: 100%;
+  max-width: 380px;
+  max-height: 90vh;
+  overflow-y: auto;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   animation: fadeIn 1.8s ease;
 }
@@ -30,7 +34,7 @@ body {
 /* Heading */
 .card h1 {
   color: #d63384;
-  font-size: 2.2rem;
+  font-size: 2rem;
   margin-bottom: 10px;
   font-style: normal;
 }
@@ -38,14 +42,14 @@ body {
 /* Paragraph text */
 .card p {
   color: #444;
-  font-size: 1.05rem;
+  font-size: 1rem;
   line-height: 1.6;
   font-style: normal;
 }
 
 /* Button */
 button {
-  margin-top: 30px;
+  margin-top: 20px;
   padding: 10px 22px;
   border: none;
   border-radius: 30px;
@@ -53,6 +57,7 @@ button {
   color: white;
   font-size: 1rem;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 button:hover {
@@ -66,57 +71,92 @@ button:hover {
   animation: fadeIn 1.5s ease;
 }
 
-/* Petals animation */
+/* Petals */
 .petals::before {
   content: "🌸 🌷 🌺 🌹 💮";
-  position: absolute;
+  position: fixed;
+  top: -50px;
+  left: 0;
   width: 100%;
   text-align: center;
   font-size: 2rem;
   animation: fall 12s linear infinite;
+  pointer-events: none;
 }
 
 @keyframes fall {
-  0% { transform: translateY(-10vh); }
-  100% { transform: translateY(110vh); }
+  0% {
+    transform: translateY(-10vh);
+  }
+  100% {
+    transform: translateY(110vh);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 #title {
-  transform: translateY(-15px);
+  transform: translateY(-10px);
 }
 
 #main-text {
-  min-height: 90px;
+  min-height: auto;
 }
 
 #surprise {
   margin-top: 18px;
 }
 
-/* 📱 MOBILE ZOOM FIX (THIS IS THE IMPORTANT PART) */
+/* Scrollbar styling */
+.card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card::-webkit-scrollbar-thumb {
+  background: rgba(214, 51, 132, 0.4);
+  border-radius: 10px;
+}
+
+/* 📱 MOBILE OPTIMIZATION */
 @media (max-width: 600px) {
   body {
-    padding: 12px;
+    padding: 10px;
+    align-items: flex-start;
   }
 
   .card {
-    transform: scale(1.1); /* 👈 zooms card on phone */
+    width: 100%;
+    max-width: 100%;
+    padding: 18px;
+    border-radius: 18px;
+    max-height: 95vh;
   }
 
   .card h1 {
-    font-size: 1.9rem;
+    font-size: 1.5rem;
   }
 
   .card p {
-    font-size: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.45;
   }
 
   button {
-    font-size: 1rem;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    margin-top: 15px;
+  }
+
+  .petals::before {
+    font-size: 1.4rem;
   }
 }
